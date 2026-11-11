@@ -1,0 +1,27 @@
+{
+  "name": "motorcycle-repair-shop-management-system",
+  "version": "1.0.0",
+  "description": "Motorcycle Repair Shop Management System — Full CRUD Web App, Routing, Guard-Clause Validation, Thin Controllers, Interactive UI Binding, and Automated Tests (Weeks 1-12)",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "test": "node tests/run-tests.js"
+  },
+  "keywords": [
+    "motorcycle",
+    "repair-shop",
+    "crud",
+    "routing",
+    "validation",
+    "controllers",
+    "automated-tests",
+    "supabase",
+    "vercel"
+  ],
+  "contributors": [
+    "murillo2003123 <alvinmurillo2003@gmail.com>",
+    "johnangelocabatingan2003-dot <johnangelocabatingan2003@gmail.com>",
+    "keanudagala2003-blip <keanudagala2003@gmail.com>"
+  ],
+  "license": "MIT"
+}
