@@ -1,6 +1,8 @@
 /**
  * HTTP Server & Interactive Web Application (Deliverables 2, 3 & 4 — Weeks 3–12)
- * Pixel-Matched SaaS Dashboard UI: Dark Left Sidebar + Light Workspace + Analytics + Live Pipeline + Fleet + Alerts
+ * Includes:
+ * 1. Public Customer Home Page (Hero, Live Plate Repair Tracker, Online Booking Intake, Services & Parts Catalog)
+ * 2. Full Admin SaaS Dashboard & 8 Functional Sidebar Modules (Dashboard, Job Orders, Spare Parts, Intake & Pickups, Customers, Mechanics, Payments, Settings)
  *
  * Team:
  * - Alvin Murillo (@murillo2003123 / alvinmurillo2003@gmail.com)
@@ -32,6 +34,7 @@ function renderAppHtml() {
       --text-muted: #64748b;
       --primary: #2563eb;
       --primary-hover: #1d4ed8;
+      --success: #10b981;
       --danger: #ef4444;
       --shadow-sm: 0 2px 6px rgba(15, 23, 42, 0.04);
       --shadow-card: 0 6px 20px rgba(15, 23, 42, 0.05);
@@ -45,14 +48,124 @@ function renderAppHtml() {
       line-height: 1.45;
       min-height: 100vh;
     }
+
+    /* ========= PUBLIC HOME PAGE / CUSTOMER SITE ========= */
+    #home-page-view {
+      display: none;
+      min-height: 100vh;
+      background: #f8fafc;
+      flex-direction: column;
+    }
+    .home-navbar {
+      background: #0f172a;
+      color: #fff;
+      padding: 1rem 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 4px 16px rgba(15, 23, 42, 0.15);
+    }
+    .home-nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+    .home-nav-links a {
+      color: #cbd5e1;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: color 0.15s;
+    }
+    .home-nav-links a:hover { color: #fff; }
+    .home-hero {
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 60%, #2563eb 100%);
+      color: #fff;
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+    .home-hero h1 {
+      font-size: 2.5rem;
+      font-weight: 900;
+      margin: 0 0 0.75rem;
+      letter-spacing: -0.03em;
+    }
+    .home-hero p {
+      max-width: 680px;
+      margin: 0 auto 2rem;
+      color: #cbd5e1;
+      font-size: 1.05rem;
+    }
+    .home-tracker-box {
+      max-width: 580px;
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      padding: 0.65rem;
+      border-radius: 14px;
+      display: flex;
+      gap: 0.6rem;
+    }
+    .home-tracker-box input {
+      flex: 1;
+      padding: 0.8rem 1rem;
+      border-radius: 10px;
+      border: none;
+      font-size: 0.95rem;
+      outline: none;
+    }
+    .home-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem;
+      width: 100%;
+    }
+    .home-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+    .home-feature-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 1.6rem;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-card);
+    }
+    .home-feature-card h3 {
+      margin: 0.5rem 0;
+      font-size: 1.15rem;
+      color: var(--text-dark);
+    }
+    .home-booking-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: start;
+    }
+    .home-footer {
+      margin-top: auto;
+      background: #0f172a;
+      color: #94a3b8;
+      text-align: center;
+      padding: 1.75rem;
+      font-size: 0.85rem;
+    }
+
+    /* ========= ADMIN DASHBOARD LAYOUT ========= */
     .app-layout {
       display: flex;
       min-height: 100vh;
     }
 
-    /* ========= DARK LEFT SIDEBAR (EXACT REFERENCE MATCH) ========= */
+    /* ========= DARK LEFT SIDEBAR ========= */
     aside.sidebar {
-      width: 225px;
+      width: 228px;
       background: var(--sidebar-bg);
       color: #fff;
       display: flex;
@@ -68,7 +181,8 @@ function renderAppHtml() {
       display: flex;
       align-items: center;
       gap: 0.65rem;
-      padding: 0.25rem 0.45rem 1.4rem;
+      padding: 0.25rem 0.45rem 1.25rem;
+      cursor: pointer;
     }
     .brand-logo-circle {
       width: 34px;
@@ -98,7 +212,7 @@ function renderAppHtml() {
     nav.sidebar-nav {
       display: flex;
       flex-direction: column;
-      gap: 0.25rem;
+      gap: 0.22rem;
       flex: 1;
     }
     nav.sidebar-nav button {
@@ -106,9 +220,9 @@ function renderAppHtml() {
       background: transparent;
       border: none;
       color: var(--sidebar-text);
-      padding: 0.68rem 0.85rem;
+      padding: 0.62rem 0.85rem;
       border-radius: 9px;
-      font-size: 0.88rem;
+      font-size: 0.86rem;
       font-weight: 600;
       display: flex;
       align-items: center;
@@ -145,6 +259,10 @@ function renderAppHtml() {
       display: flex;
       align-items: center;
       gap: 0.6rem;
+      cursor: pointer;
+    }
+    .sidebar-profile:hover {
+      border-color: rgba(255, 255, 255, 0.2);
     }
     .avatar-circle {
       width: 34px;
@@ -315,7 +433,7 @@ function renderAppHtml() {
       letter-spacing: 0.02em;
     }
 
-    /* Action Pills Row (New Pickup, New Order, Customer Site style) */
+    /* Action Pills Row */
     .quick-actions-row {
       display: flex;
       flex-wrap: wrap;
@@ -376,7 +494,10 @@ function renderAppHtml() {
       flex-direction: column;
       justify-content: space-between;
       min-height: 138px;
+      cursor: pointer;
+      transition: transform 0.15s;
     }
+    .kpi-card:hover { transform: translateY(-2px); }
     .kpi-top {
       display: flex;
       align-items: center;
@@ -426,7 +547,7 @@ function renderAppHtml() {
       font-weight: 500;
     }
 
-    /* Dashboard Lower Split Layout (Left Analytics + Right Stack) */
+    /* Dashboard Lower Split Layout */
     .dashboard-split {
       display: grid;
       grid-template-columns: 315px 1fr;
@@ -688,6 +809,7 @@ function renderAppHtml() {
       .kpi-grid { grid-template-columns: repeat(2, 1fr); }
       .dashboard-split { grid-template-columns: 1fr; }
       .pipeline-grid { grid-template-columns: repeat(2, 1fr); }
+      .home-booking-grid { grid-template-columns: 1fr; }
     }
     @media (max-width: 768px) {
       .app-layout { flex-direction: column; }
@@ -697,10 +819,135 @@ function renderAppHtml() {
   </style>
 </head>
 <body>
-  <div class="app-layout">
-    <!-- ========= LEFT DARK SIDEBAR (8 ITEMS MATCHING PIC) ========= -->
+  <!-- =========================================================================
+       1. PUBLIC HOME PAGE / CUSTOMER PORTAL VIEW
+       ========================================================================= -->
+  <div id="home-page-view">
+    <nav class="home-navbar">
+      <div style="display:flex; align-items:center; gap:0.75rem; cursor:pointer;" onclick="openAdminPortal('dashboard')">
+        <div class="brand-logo-circle">
+          <svg viewBox="0 0 24 24"><circle cx="5.5" cy="17.5" r="3.5"/><circle cx="18.5" cy="17.5" r="3.5"/><path d="M15 6a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-3 11.5V14l-3-3 4-3 2 3h2"/></svg>
+        </div>
+        <span style="font-size:1.25rem; font-weight:800;">MotoCare Shop</span>
+      </div>
+      <div class="home-nav-links">
+        <a href="#home-services">Services</a>
+        <a href="#home-booking">Book a Repair</a>
+        <a href="#home-parts">Available Parts</a>
+        <button type="button" class="btn" onclick="openAdminPortal('dashboard')">
+          Admin Dashboard →
+        </button>
+      </div>
+    </nav>
+
+    <section class="home-hero">
+      <span style="background:rgba(56,189,248,0.2); color:#7dd3fc; padding:0.3rem 0.85rem; border-radius:999px; font-size:0.78rem; font-weight:700; text-transform:uppercase; letter-spacing:0.06em;">
+        Murillo • Cabatingan • Dagala Motorcycle Service Center
+      </span>
+      <h1 style="margin-top:1rem;">Fast, Transparent Motorcycle Repair &amp; Maintenance</h1>
+      <p>Track your motorcycle's live service status by plate number, book a repair appointment online, or browse genuine spare parts in stock.</p>
+
+      <!-- Live Plate Number Repair Tracker -->
+      <div class="home-tracker-box">
+        <input type="text" id="home-plate-input" placeholder="Enter Motorcycle Plate Number (e.g. ABC-1234 or XYZ-9876)" />
+        <button type="button" class="btn" id="home-track-btn" style="padding:0.8rem 1.4rem; font-size:0.9rem;">
+          🔎 Track My Bike
+        </button>
+      </div>
+      <div id="home-tracker-result" style="max-width:580px; margin:1rem auto 0; text-align:left;"></div>
+    </section>
+
+    <div class="home-container">
+      <!-- Shop Highlights / Services -->
+      <div id="home-services" class="home-grid-3">
+        <div class="home-feature-card">
+          <div class="kpi-icon blue" style="margin-bottom:0.75rem;">🏍️</div>
+          <h3>1. Motorcycle Intake &amp; Registration</h3>
+          <p style="color:var(--text-muted); font-size:0.88rem; margin-bottom:1rem;">
+            Instant plate lookup and digital service history for scooters, underbones, and big bikes. Managed by <strong>Alvin Murillo</strong>.
+          </p>
+          <button type="button" class="btn btn-secondary btn-sm" onclick="openAdminPortal('customers')">Manage Customers →</button>
+        </div>
+
+        <div class="home-feature-card">
+          <div class="kpi-icon purple" style="margin-bottom:0.75rem;">🔧</div>
+          <h3>2. Live Repair Job Order Pipeline</h3>
+          <p style="color:var(--text-muted); font-size:0.88rem; margin-bottom:1rem;">
+            Real-time bay tracking from Intake → Diagnosis → Servicing → Road Test → Release. Managed by <strong>John Angelo Cabatingan</strong>.
+          </p>
+          <button type="button" class="btn btn-secondary btn-sm" onclick="openAdminPortal('repairs')">View Job Orders →</button>
+        </div>
+
+        <div class="home-feature-card">
+          <div class="kpi-icon blue" style="margin-bottom:0.75rem;">📦</div>
+          <h3>3. Genuine Spare Parts &amp; Lubricants</h3>
+          <p style="color:var(--text-muted); font-size:0.88rem; margin-bottom:1rem;">
+            Live SKU stock monitoring for synthetic oils, brake pads, tires, and electrical components. Managed by <strong>Keanu Dagala</strong>.
+          </p>
+          <button type="button" class="btn btn-secondary btn-sm" onclick="openAdminPortal('parts')">Browse Spare Parts →</button>
+        </div>
+      </div>
+
+      <!-- Online Customer Booking Form + Live Spare Parts Catalog -->
+      <div id="home-booking" class="home-booking-grid">
+        <div class="white-card">
+          <h3 style="margin-top:0; font-size:1.2rem;">📅 Book a Motorcycle Service Appointment</h3>
+          <p style="color:var(--text-muted); font-size:0.85rem; margin-bottom:1.2rem;">
+            Register your motorcycle and reported issue below. It will appear immediately in the shop's live intake queue!
+          </p>
+          <form id="home-booking-form" novalidate>
+            <div class="form-group">
+              <label for="hb-name">Rider / Customer Name *</label>
+              <input id="hb-name" name="name" placeholder="e.g. Carlo Mendoza" required />
+            </div>
+            <div class="form-group">
+              <label for="hb-phone">Mobile Phone Number *</label>
+              <input id="hb-phone" name="phone" placeholder="09171234567" required />
+            </div>
+            <div class="form-group">
+              <label for="hb-plate">Plate Number (Format: ABC-1234) *</label>
+              <input id="hb-plate" name="plateNumber" placeholder="NDA-4521" required />
+            </div>
+            <div class="form-group">
+              <label for="hb-model">Motorcycle Model *</label>
+              <input id="hb-model" name="motorcycleModel" placeholder="Yamaha Aerox 155" required />
+            </div>
+            <div class="form-group">
+              <label for="hb-issue">Service Needed / Reported Issue *</label>
+              <input id="hb-issue" name="issue" placeholder="Full CVT cleaning, tune-up, and oil change" required />
+            </div>
+            <button type="submit" class="btn" id="hb-submit-btn" style="width:100%; justify-content:center; padding:0.75rem;">
+              Submit Service Booking
+            </button>
+          </form>
+        </div>
+
+        <div id="home-parts" class="white-card">
+          <div class="card-header-row">
+            <h3 style="margin:0; font-size:1.15rem;">🛠️ Live Spare Parts &amp; Pricing</h3>
+            <span class="pill-live">In Stock</span>
+          </div>
+          <p style="color:var(--text-muted); font-size:0.84rem; margin-top:0;">
+            Real-time spare parts inventory fetched directly from the shop server:
+          </p>
+          <div id="home-parts-list" style="display:flex; flex-direction:column; gap:0.65rem; margin-top:1rem;"></div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="home-footer">
+      <div><strong>MotoCare — Motorcycle Repair Shop Management System</strong> • Powered by Supabase PostgreSQL &amp; Vercel</div>
+      <div style="margin-top:0.35rem;">Team Contributors: Alvin Murillo (@murillo2003123) • John Angelo Cabatingan (@johnangelocabatingan2003-dot) • Keanu Dagala (@keanudagala2003-blip)</div>
+    </footer>
+  </div>
+
+  <!-- =========================================================================
+       2. ADMIN DASHBOARD & CRUD SYSTEM VIEW
+       ========================================================================= -->
+  <div class="app-layout" id="admin-portal-view">
+    <!-- ========= LEFT DARK SIDEBAR ========= -->
     <aside class="sidebar" aria-label="Main Navigation Sidebar">
-      <div class="sidebar-brand">
+      <div class="sidebar-brand" onclick="switchTab('dashboard')" title="Go to Dashboard">
         <div class="brand-logo-circle">
           <svg viewBox="0 0 24 24"><circle cx="5.5" cy="17.5" r="3.5"/><circle cx="18.5" cy="17.5" r="3.5"/><path d="M15 6a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-3 11.5V14l-3-3 4-3 2 3h2"/></svg>
         </div>
@@ -708,6 +955,10 @@ function renderAppHtml() {
       </div>
 
       <nav class="sidebar-nav" role="navigation" aria-label="Main Menu">
+        <button type="button" data-tab="home">
+          <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          <span>Home Page</span>
+        </button>
         <button type="button" class="active" data-tab="dashboard">
           <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
           <span>Dashboard</span>
@@ -742,7 +993,7 @@ function renderAppHtml() {
         </button>
       </nav>
 
-      <div class="sidebar-profile">
+      <div class="sidebar-profile" onclick="toggleUserRole()" title="Click to switch role between Admin Owner and Guest">
         <div class="avatar-circle">A</div>
         <div class="profile-meta">
           <div class="profile-name">Alvin Murillo</div>
@@ -763,12 +1014,12 @@ function renderAppHtml() {
         <div class="top-utilities">
           <div class="search-box">
             <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-            <input type="text" id="plate-search-input" placeholder="Search" />
+            <input type="text" id="plate-search-input" placeholder="Search Plate (e.g. ABC-1234)" />
           </div>
           <button type="button" class="icon-btn" id="refresh-btn" title="Refresh Live Data">
             <svg viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
           </button>
-          <button type="button" class="icon-btn" id="test-404-btn" title="Shop Notifications & 404 State Check">
+          <button type="button" class="icon-btn" id="test-404-btn" title="View Shop Alerts & Test 404 State">
             <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
             <span class="notif-badge">5</span>
           </button>
@@ -794,7 +1045,7 @@ function renderAppHtml() {
         <button type="button" class="action-pill" id="quick-new-repair-btn">
           New Job Order
         </button>
-        <button type="button" class="action-pill soft-blue" id="quick-restock-btn">
+        <button type="button" class="action-pill soft-blue" id="quick-customer-site-btn">
           <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
           Customer Site
         </button>
@@ -802,9 +1053,9 @@ function renderAppHtml() {
 
       <!-- ========= DASHBOARD VIEW ========= -->
       <section id="dashboard-view">
-        <!-- 4 KPI Cards Row -->
+        <!-- 4 KPI Cards Row (Clickable) -->
         <div class="kpi-grid">
-          <div class="kpi-card">
+          <div class="kpi-card" onclick="switchTab('payments')" title="View Payments & Revenue">
             <div class="kpi-top">
               <span class="kpi-label">Total Revenue</span>
               <div class="kpi-icon purple">₱</div>
@@ -813,7 +1064,7 @@ function renderAppHtml() {
             <div class="kpi-sub">Settled</div>
           </div>
 
-          <div class="kpi-card">
+          <div class="kpi-card" onclick="switchTab('repairs')" title="View Active Job Orders">
             <div class="kpi-top">
               <span class="kpi-label">Active Job Orders</span>
               <div class="kpi-icon blue">
@@ -824,7 +1075,7 @@ function renderAppHtml() {
             <div class="kpi-sub">Total</div>
           </div>
 
-          <div class="kpi-card">
+          <div class="kpi-card" onclick="switchTab('pickups')" title="View Scheduled Bikes & Pickups">
             <div class="kpi-top">
               <span class="kpi-label">Bikes Scheduled</span>
               <div class="kpi-icon blue">
@@ -835,7 +1086,7 @@ function renderAppHtml() {
             <div class="kpi-sub">Today</div>
           </div>
 
-          <div class="kpi-card">
+          <div class="kpi-card" onclick="switchTab('repairs')" title="View Ready for Release Bikes">
             <div class="kpi-top">
               <span class="kpi-label">Ready for Release</span>
               <div class="kpi-icon blue">
@@ -854,9 +1105,9 @@ function renderAppHtml() {
             <div>
               <div class="card-header-row" style="align-items:flex-start;">
                 <h3 class="card-title" style="line-height:1.35; font-size:0.95rem;">Revenue &amp;<br/>Order Volume<br/>Analytics</h3>
-                <select style="border:1px solid #cbd5e1; border-radius:6px; padding:0.28rem 0.5rem; font-size:0.72rem; font-weight:600; color:#334155;">
-                  <option>Last 30 Days</option>
-                  <option>Last 7 Days</option>
+                <select id="analytics-range-select" style="border:1px solid #cbd5e1; border-radius:6px; padding:0.28rem 0.5rem; font-size:0.72rem; font-weight:600; color:#334155;">
+                  <option value="30">Last 30 Days</option>
+                  <option value="7">Last 7 Days</option>
                 </select>
               </div>
               <div style="display:flex; gap:1rem; font-size:0.72rem; color:var(--text-muted); margin-bottom:1.5rem;">
@@ -881,8 +1132,8 @@ function renderAppHtml() {
                 <line x1="0" y1="45" x2="300" y2="45" stroke="#f1f5f9" stroke-width="1"/>
                 <line x1="0" y1="90" x2="300" y2="90" stroke="#f1f5f9" stroke-width="1"/>
                 <line x1="0" y1="135" x2="300" y2="135" stroke="#f1f5f9" stroke-width="1"/>
-                <path d="M 0 140 Q 90 110, 185 88 T 300 72 L 300 160 L 0 160 Z" fill="url(#revGrad)"/>
-                <path d="M 0 140 Q 90 110, 185 88 T 300 72" fill="none" stroke="#2563eb" stroke-width="2"/>
+                <path id="chart-rev-area" d="M 0 140 Q 90 110, 185 88 T 300 72 L 300 160 L 0 160 Z" fill="url(#revGrad)"/>
+                <path id="chart-rev-line" d="M 0 140 Q 90 110, 185 88 T 300 72" fill="none" stroke="#2563eb" stroke-width="2"/>
                 <path d="M 0 148 Q 95 130, 190 112 T 300 95 L 300 160 L 0 160 Z" fill="url(#volGrad)"/>
                 <path d="M 0 148 Q 95 130, 190 112 T 300 95" fill="none" stroke="#38bdf8" stroke-width="1.6" stroke-dasharray="3,3"/>
               </svg>
@@ -909,7 +1160,7 @@ function renderAppHtml() {
               </div>
 
               <div class="pipeline-grid">
-                <div class="stage-card stage-intake" onclick="switchTab('repairs')">
+                <div class="stage-card stage-intake" onclick="switchTab('pickups')">
                   <div class="stage-count" id="pipe-pending">1</div>
                   <div class="stage-name">RECEIVED</div>
                   <div class="stage-tag">Intake</div>
@@ -929,7 +1180,7 @@ function renderAppHtml() {
                   <div class="stage-name">TESTING</div>
                   <div class="stage-tag">Tuning</div>
                 </div>
-                <div class="stage-card stage-dispatch" onclick="switchTab('repairs')">
+                <div class="stage-card stage-dispatch" onclick="switchTab('payments')">
                   <div class="stage-count" id="pipe-paid">0</div>
                   <div class="stage-name">DISPATCH</div>
                   <div class="stage-tag">Ready</div>
@@ -967,18 +1218,22 @@ function renderAppHtml() {
 
             <!-- Card 3: Live Bay & Shop Alerts -->
             <div class="white-card" style="padding:1.1rem 1.45rem;">
-              <div class="card-header-row" style="margin-bottom:0;">
+              <div class="card-header-row" style="margin-bottom:0.5rem;">
                 <h3 class="card-title">
                   <span>🔔</span> Live Bay &amp; Shop Alerts
                 </h3>
                 <button type="button" class="view-all-link" onclick="switchTab('parts')">View All →</button>
+              </div>
+              <div id="live-alerts-list" style="font-size:0.8rem; color:var(--text-muted); display:flex; flex-direction:column; gap:0.35rem;">
+                <div>• <strong>Bay 1 (Berto)</strong>: Honda Click 125i (<code>ABC-1234</code>) CVT cleaning in progress.</div>
+                <div>• <strong>Bay 2 (Dante)</strong>: Yamaha NMAX 155 (<code>XYZ-9876</code>) awaiting front brake pad bleed.</div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- ========= CRUD MODULE / STAFF / SETTINGS VIEW ========= -->
+      <!-- ========= CRUD MODULE / PICKUPS / PAYMENTS / STAFF / SETTINGS VIEW ========= -->
       <section id="module-view" style="display:none;">
         <div class="module-card">
           <div class="module-toolbar">
@@ -1054,7 +1309,11 @@ function renderAppHtml() {
   <script>
     const state = {
       activeTab: 'dashboard',
+      crudResource: 'customers',
       records: [],
+      customersCache: [],
+      repairsCache: [],
+      partsCache: [],
       editingId: null,
       deletingId: null,
     };
@@ -1094,8 +1353,8 @@ function renderAppHtml() {
     }
 
     async function apiRequest(method, path, body = null) {
-      const simulateFailure = document.getElementById('simulate-network-error').checked;
-      if (simulateFailure) {
+      const simEl = document.getElementById('simulate-network-error');
+      if (simEl && simEl.checked) {
         await new Promise((r) => setTimeout(r, 300));
         throw new Error('Simulated network/server failure');
       }
@@ -1136,12 +1395,50 @@ function renderAppHtml() {
       }
     }
 
+    /* ========= HOME PAGE <-> ADMIN PORTAL SWITCHING ========= */
+    async function openHomePage() {
+      document.getElementById('admin-portal-view').style.display = 'none';
+      document.getElementById('home-page-view').style.display = 'flex';
+      state.activeTab = 'home';
+      try {
+        const pRes = await apiRequest('GET', '/parts');
+        const parts = pRes.data || [];
+        const listEl = document.getElementById('home-parts-list');
+        listEl.innerHTML = parts.map((p) => \`
+          <div style="display:flex; justify-content:space-between; align-items:center; padding:0.75rem 1rem; border:1px solid #e2e8f0; border-radius:10px; background:#f8fafc;">
+            <div>
+              <div style="font-weight:800; font-size:0.9rem;">\${escapeHtml(p.name)}</div>
+              <div style="font-size:0.75rem; color:#64748b;">SKU: <code>\${escapeHtml(p.sku)}</code> • Category: \${escapeHtml(p.category)}</div>
+            </div>
+            <div style="text-align:right;">
+              <div style="font-weight:800; color:#2563eb;">₱\${Number(p.unitPrice).toFixed(2)}</div>
+              <div style="font-size:0.72rem; color:#15803d; font-weight:700;">\${p.qty} in stock</div>
+            </div>
+          </div>
+        \`).join('');
+      } catch (_err) {
+        // Ignore error if simulated
+      }
+    }
+
+    function openAdminPortal(targetTab = 'dashboard') {
+      document.getElementById('home-page-view').style.display = 'none';
+      document.getElementById('admin-portal-view').style.display = 'flex';
+      switchTab(targetTab);
+    }
+
     function switchTab(tabName) {
-      const normalized = tabName === 'pickups' ? 'customers' : tabName === 'payments' ? 'repairs' : tabName;
+      if (tabName === 'home') {
+        openHomePage();
+        return;
+      }
+      document.getElementById('home-page-view').style.display = 'none';
+      document.getElementById('admin-portal-view').style.display = 'flex';
+
       document.querySelectorAll('.sidebar-nav button[data-tab]').forEach((b) => {
         b.classList.toggle('active', b.dataset.tab === tabName);
       });
-      state.activeTab = normalized;
+      state.activeTab = tabName;
       loadCurrentModule();
     }
 
@@ -1158,6 +1455,9 @@ function renderAppHtml() {
         const customers = cRes.data || [];
         const repairs = rRes.data || [];
         const parts = pRes.data || [];
+        state.customersCache = customers;
+        state.repairsCache = repairs;
+        state.partsCache = parts;
 
         const totalRevenue = repairs.reduce((sum, item) => sum + Number(item.laborCost || 0), 0);
         const readyCount = repairs.filter((r) => r.status === 'completed' || r.status === 'paid').length;
@@ -1172,6 +1472,13 @@ function renderAppHtml() {
         document.getElementById('pipe-parts').textContent = parts.length;
         document.getElementById('pipe-completed').textContent = repairs.filter((r) => r.status === 'completed').length;
         document.getElementById('pipe-paid').textContent = repairs.filter((r) => r.status === 'paid').length;
+
+        const alertsEl = document.getElementById('live-alerts-list');
+        if (repairs.length > 0) {
+          alertsEl.innerHTML = repairs.slice(0, 3).map((r) => \`
+            <div>• <strong>Bay (\${escapeHtml(r.mechanic)})</strong>: Order #\${r.id} — \${escapeHtml(r.issue)} (<span class="badge badge-\${escapeHtml(r.status)}">\${escapeHtml(r.status)}</span>)</div>
+          \`).join('');
+        }
       } catch (_err) {
         showToast('Simulated network error: click Refresh after unchecking Simulate 500 Error.', true);
       }
@@ -1235,15 +1542,29 @@ function renderAppHtml() {
         return;
       }
 
+      const resourceMap = {
+        customers: 'customers',
+        pickups: 'customers',
+        repairs: 'repairs',
+        payments: 'repairs',
+        parts: 'parts',
+      };
+      const apiResource = resourceMap[tab] || 'customers';
+      state.crudResource = apiResource;
+
       document.getElementById('open-create-btn').style.display = 'inline-flex';
       const titles = {
         customers: 'Customers & Motorcycles',
+        pickups: 'Motorcycle Intake & Scheduled Pickups',
         repairs: 'Repair Job Orders',
+        payments: 'Service Billing & Settled Payments',
         parts: 'Spare Parts Inventory',
       };
       const subtitles = {
         customers: 'Owner: Alvin Murillo (@murillo2003123) — Full CRUD + Plate Lookup Checkpoint',
+        pickups: 'Scheduled motorcycle intakes & registered rider vehicles — Click "+ New Record" to log intake',
         repairs: 'Owner: John Angelo Cabatingan (@johnangelocabatingan2003-dot) — Full CRUD + Status Checkpoint',
+        payments: 'Track labor billing, mark job orders as Paid, and verify shop revenue',
         parts: 'Owner: Keanu Dagala (@keanudagala2003-blip) — Full CRUD + Restock Checkpoint',
       };
       document.getElementById('module-title').textContent = titles[tab];
@@ -1251,7 +1572,7 @@ function renderAppHtml() {
       renderStateBanner('loading', 'Loading records from shop server...');
 
       try {
-        const res = await apiRequest('GET', '/' + tab);
+        const res = await apiRequest('GET', '/' + apiResource);
         state.records = res.data || [];
         if (state.records.length === 0) {
           renderStateBanner('empty', 'No records found in this module yet. Click "+ New Record" to create the first entry.');
@@ -1273,7 +1594,7 @@ function renderAppHtml() {
       const body = document.getElementById('table-body');
       const tab = state.activeTab;
 
-      if (tab === 'customers') {
+      if (tab === 'customers' || tab === 'pickups') {
         head.innerHTML = '<tr><th>ID</th><th>Customer Name</th><th>Phone</th><th>Plate No.</th><th>Motorcycle Model</th><th>Actions</th></tr>';
         body.innerHTML = state.records.map((r) => \`
           <tr>
@@ -1289,7 +1610,7 @@ function renderAppHtml() {
             </td>
           </tr>
         \`).join('');
-      } else if (tab === 'repairs') {
+      } else if (tab === 'repairs' || tab === 'payments') {
         head.innerHTML = '<tr><th>ID</th><th>Customer</th><th>Reported Issue</th><th>Mechanic</th><th>Labor Cost</th><th>Status</th><th>Actions</th></tr>';
         body.innerHTML = state.records.map((r) => \`
           <tr>
@@ -1303,6 +1624,7 @@ function renderAppHtml() {
               <button class="btn btn-secondary btn-sm" onclick="viewRecord('repairs', \${r.id})">View</button>
               <button class="btn btn-secondary btn-sm" onclick="openEditModal(\${r.id})">Edit</button>
               <button class="btn btn-secondary btn-sm" onclick="cycleRepairStatus(\${r.id}, '\${r.status}')">Next Stage</button>
+              \${r.status !== 'paid' ? \`<button class="btn btn-sm" onclick="markRepairPaid(\${r.id})">Mark Paid</button>\` : ''}
               <button class="btn btn-danger btn-sm" onclick="openDeleteModal(\${r.id})">Delete</button>
             </td>
           </tr>
@@ -1329,7 +1651,7 @@ function renderAppHtml() {
     }
 
     async function viewRecord(resource, id) {
-      const targetResource = resource || (state.activeTab === 'dashboard' ? 'customers' : state.activeTab);
+      const targetResource = resource || state.crudResource || 'customers';
       const modal = document.getElementById('detail-modal');
       const content = document.getElementById('detail-content');
       content.innerHTML = '<p>Loading record details...</p>';
@@ -1355,9 +1677,9 @@ function renderAppHtml() {
       }
     }
 
-    function buildFormFieldsHtml(record = {}, forceTab = null) {
-      const tab = forceTab || state.activeTab;
-      if (tab === 'customers') {
+    function buildFormFieldsHtml(record = {}, forceResource = null) {
+      const resType = forceResource || state.crudResource;
+      if (resType === 'customers') {
         return \`
           <div class="form-group">
             <label for="f-name">Customer Name *</label>
@@ -1381,7 +1703,7 @@ function renderAppHtml() {
           </div>
         \`;
       }
-      if (tab === 'repairs') {
+      if (resType === 'repairs') {
         const st = record.status || 'pending';
         return \`
           <div class="form-group">
@@ -1457,7 +1779,8 @@ function renderAppHtml() {
       if (targetModule && state.activeTab !== targetModule) {
         switchTab(targetModule);
       }
-      const mod = targetModule || (state.activeTab === 'dashboard' ? 'repairs' : state.activeTab);
+      const mod = targetModule || state.crudResource || 'repairs';
+      state.crudResource = mod;
       state.editingId = null;
       document.getElementById('form-title').textContent = 'Create New ' + mod.slice(0, -1).toUpperCase();
       document.getElementById('form-global-error').style.display = 'none';
@@ -1488,11 +1811,12 @@ function renderAppHtml() {
       const submitBtn = document.getElementById('submit-form-btn');
       const formData = new FormData(e.target);
       const payload = Object.fromEntries(formData.entries());
+      const resType = state.crudResource;
 
-      if (state.activeTab === 'repairs') {
+      if (resType === 'repairs') {
         payload.customerId = payload.customerId === '' ? '' : Number(payload.customerId);
         payload.laborCost = payload.laborCost === '' ? '' : Number(payload.laborCost);
-      } else if (state.activeTab === 'parts') {
+      } else if (resType === 'parts') {
         payload.qty = payload.qty === '' ? '' : Number(payload.qty);
         payload.unitPrice = payload.unitPrice === '' ? '' : Number(payload.unitPrice);
       }
@@ -1503,7 +1827,7 @@ function renderAppHtml() {
       try {
         const isEdit = state.editingId !== null;
         const method = isEdit ? 'PUT' : 'POST';
-        const path = isEdit ? \`/\${state.activeTab}/\${state.editingId}\` : \`/\${state.activeTab}\`;
+        const path = isEdit ? \`/\${resType}/\${state.editingId}\` : \`/\${resType}\`;
         const res = await apiRequest(method, path, payload);
 
         if (res.status === 200 || res.status === 201) {
@@ -1541,7 +1865,7 @@ function renderAppHtml() {
     function openDeleteModal(id) {
       state.deletingId = id;
       document.getElementById('delete-message').textContent =
-        \`Are you sure you want to delete record #\${id} from \${state.activeTab}? This action cannot be undone.\`;
+        \`Are you sure you want to delete record #\${id} from \${state.crudResource}? This action cannot be undone.\`;
       document.getElementById('delete-modal').classList.add('open');
     }
 
@@ -1551,7 +1875,7 @@ function renderAppHtml() {
       btn.textContent = 'Deleting...';
 
       try {
-        const res = await apiRequest('DELETE', \`/\${state.activeTab}/\${state.deletingId}\`);
+        const res = await apiRequest('DELETE', \`/\${state.crudResource}/\${state.deletingId}\`);
         document.getElementById('delete-modal').classList.remove('open');
         if (res.status === 200) {
           showToast('Record deleted successfully.');
@@ -1585,6 +1909,20 @@ function renderAppHtml() {
       }
     }
 
+    async function markRepairPaid(id) {
+      try {
+        const res = await apiRequest('PATCH', \`/repairs/\${id}/status\`, { status: 'paid' });
+        if (res.status === 200) {
+          showToast(\`Job Order #\${id} marked as PAID & Settled!\`);
+          await loadCurrentModule();
+        } else {
+          showToast(res.error || 'Could not mark as paid.', true);
+        }
+      } catch (_err) {
+        showToast('Network error while updating payment status.', true);
+      }
+    }
+
     async function quickRestockPart(id) {
       try {
         const res = await apiRequest('POST', \`/parts/\${id}/restock\`, { addQty: 10 });
@@ -1599,6 +1937,101 @@ function renderAppHtml() {
       }
     }
 
+    /* ========= HOME PAGE PLATE TRACKER & BOOKING HANDLERS ========= */
+    document.getElementById('home-track-btn').addEventListener('click', async () => {
+      const plate = document.getElementById('home-plate-input').value.trim();
+      const out = document.getElementById('home-tracker-result');
+      if (!plate) {
+        showToast('Please enter a plate number (e.g. ABC-1234).', true);
+        return;
+      }
+      out.innerHTML = '<div class="white-card" style="color:#0f172a;">Searching shop records...</div>';
+      try {
+        const cRes = await apiRequest('GET', '/customers/plate/' + encodeURIComponent(plate));
+        if (cRes.status !== 200) {
+          out.innerHTML = \`
+            <div class="white-card" style="color:#991b1b; background:#fef2f2; border-color:#fca5a5;">
+              <strong>Not Found:</strong> \${escapeHtml(cRes.error)} (Try <code>ABC-1234</code> or <code>XYZ-9876</code>)
+            </div>
+          \`;
+          return;
+        }
+        const customer = cRes.data;
+        const rRes = await apiRequest('GET', '/repairs');
+        const repairs = (rRes.data || []).filter((r) => r.customerId === customer.id);
+        const latestRepair = repairs[repairs.length - 1];
+
+        out.innerHTML = \`
+          <div class="white-card" style="color:#0f172a;">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <div>
+                <strong style="font-size:1.05rem;">\${escapeHtml(customer.motorcycleModel)} (\${escapeHtml(customer.plateNumber)})</strong>
+                <div style="font-size:0.82rem; color:#64748b;">Owner: \${escapeHtml(customer.name)} • Phone: \${escapeHtml(customer.phone)}</div>
+              </div>
+              <span class="badge badge-\${latestRepair ? escapeHtml(latestRepair.status) : 'pending'}">
+                \${latestRepair ? escapeHtml(latestRepair.status) : 'REGISTERED'}
+              </span>
+            </div>
+            \${latestRepair ? \`
+              <div style="margin-top:0.75rem; padding-top:0.75rem; border-top:1px solid #e2e8f0; font-size:0.85rem;">
+                <div><strong>Service Issue:</strong> \${escapeHtml(latestRepair.issue)}</div>
+                <div><strong>Assigned Mechanic:</strong> \${escapeHtml(latestRepair.mechanic)} • <strong>Estimated Labor:</strong> ₱\${Number(latestRepair.laborCost).toFixed(2)}</div>
+              </div>
+            \` : ''}
+          </div>
+        \`;
+      } catch (_err) {
+        out.innerHTML = '<div class="white-card" style="color:#991b1b;">Error connecting to server.</div>';
+      }
+    });
+
+    document.getElementById('home-booking-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = document.getElementById('hb-submit-btn');
+      const fd = new FormData(e.target);
+      const data = Object.fromEntries(fd.entries());
+
+      btn.disabled = true;
+      btn.textContent = 'Submitting Booking...';
+
+      try {
+        const cRes = await apiRequest('POST', '/customers', {
+          name: data.name,
+          phone: data.phone,
+          plateNumber: data.plateNumber,
+          motorcycleModel: data.motorcycleModel,
+        });
+
+        if (cRes.status !== 201) {
+          showToast(cRes.error || 'Invalid customer details.', true);
+          return;
+        }
+
+        const rRes = await apiRequest('POST', '/repairs', {
+          customerId: cRes.data.id,
+          issue: data.issue,
+          mechanic: 'Berto',
+          laborCost: 500,
+          status: 'pending',
+        });
+
+        if (rRes.status === 201) {
+          showToast('Booking confirmed! Your motorcycle is now in the shop intake queue.');
+          e.target.reset();
+          document.getElementById('home-plate-input').value = cRes.data.plateNumber;
+          document.getElementById('home-track-btn').click();
+        } else {
+          showToast(rRes.error || 'Could not create repair order.', true);
+        }
+      } catch (_err) {
+        showToast('Network error while submitting booking.', true);
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'Submit Service Booking';
+      }
+    });
+
+    /* ========= TOP SEARCH & CONTROLS ========= */
     document.getElementById('plate-search-input').addEventListener('keydown', async (e) => {
       if (e.key !== 'Enter') return;
       const plate = e.target.value.trim();
@@ -1615,10 +2048,31 @@ function renderAppHtml() {
       }
     });
 
+    function toggleUserRole() {
+      const sel = document.getElementById('role-select');
+      sel.value = sel.value === 'owner' ? 'guest' : 'owner';
+      sel.dispatchEvent(new Event('change'));
+    }
+
     document.getElementById('role-select').addEventListener('change', (e) => {
       const isOwner = e.target.value === 'owner';
       document.getElementById('sidebar-role-label').textContent = isOwner ? 'ADMIN • SWITCH' : 'GUEST • READ ONLY';
       showToast('Switched active role to ' + (isOwner ? 'Shop Owner (Full Access)' : 'Guest (403 Delete Guard)'));
+    });
+
+    document.getElementById('analytics-range-select').addEventListener('change', (e) => {
+      const is7 = e.target.value === '7';
+      document.getElementById('chart-rev-line').setAttribute(
+        'd',
+        is7 ? 'M 0 130 Q 95 95, 190 78 T 300 50' : 'M 0 140 Q 90 110, 185 88 T 300 72'
+      );
+      document.getElementById('chart-rev-area').setAttribute(
+        'd',
+        is7
+          ? 'M 0 130 Q 95 95, 190 78 T 300 50 L 300 160 L 0 160 Z'
+          : 'M 0 140 Q 90 110, 185 88 T 300 72 L 300 160 L 0 160 Z'
+      );
+      showToast('Analytics updated to ' + (is7 ? 'Last 7 Days' : 'Last 30 Days'));
     });
 
     document.querySelectorAll('.sidebar-nav button[data-tab]').forEach((btn) => {
@@ -1628,8 +2082,11 @@ function renderAppHtml() {
     document.getElementById('open-create-btn').onclick = () => openCreateModal();
     document.getElementById('quick-new-repair-btn').onclick = () => openCreateModal('repairs');
     document.getElementById('quick-new-customer-btn').onclick = () => openCreateModal('customers');
-    document.getElementById('quick-restock-btn').onclick = () => switchTab('parts');
-    document.getElementById('refresh-btn').onclick = () => loadCurrentModule();
+    document.getElementById('quick-customer-site-btn').onclick = () => openHomePage();
+    document.getElementById('refresh-btn').onclick = () => {
+      loadCurrentModule();
+      showToast('Live shop data refreshed.');
+    };
     document.getElementById('cancel-form-btn').onclick = () => document.getElementById('form-modal').classList.remove('open');
     document.getElementById('close-detail-btn').onclick = () => document.getElementById('detail-modal').classList.remove('open');
     document.getElementById('cancel-delete-btn').onclick = () => document.getElementById('delete-modal').classList.remove('open');
