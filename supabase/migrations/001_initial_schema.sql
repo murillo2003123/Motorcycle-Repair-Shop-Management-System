@@ -57,5 +57,15 @@ VALUES
 INSERT INTO public.parts (name, sku, qty, unit_price, category)
 VALUES
   ('Synthetic Scooter Oil 10W-40', 'OIL-10W40', 25, 320.00, 'lubricants'),
-  ('Ceramic Front Brake Pads NMAX', 'BRK-NMAXF', 12, 550.00, 'brakes')
+  ('Ceramic Front Brake Pads NMAX', 'BRK-NMAXF', 12, 550.00, 'brakes'),
+  ('CVT Kevlar Drive Belt Click 125i', 'ENG-CVT125', 18, 890.00, 'engine'),
+  ('NGK Laser Iridium Spark Plug CPR8EA', 'ELC-NGK09', 35, 480.00, 'electrical'),
+  ('Michelin City Grip 2 Tubeless Tire 110/70-13', 'TIR-MCG13', 10, 2450.00, 'tires'),
+  ('Yuasa Maintenance-Free Battery YTZ6V 12V', 'ELC-YUA6V', 14, 1380.00, 'electrical'),
+  ('Motul Scooter Gear Oil 80W-90 120ml', 'OIL-GEAR80', 42, 150.00, 'lubricants'),
+  ('Brembo DOT 4 Brake Fluid 500ml', 'BRK-DOT4', 20, 380.00, 'brakes'),
+  ('Genuine High-Flow Air Filter Element Aerox/NMAX', 'ENG-AIR155', 22, 340.00, 'engine'),
+  ('Heavy Duty Gold Drive Chain & Sprocket Set 428H', 'ENG-CHN428', 9, 1650.00, 'engine'),
+  ('CNC Stealth Side Mirror Set (Street Legal)', 'BDY-MIR01', 15, 750.00, 'body'),
+  ('Pirelli Angel Scooter Rear Tire 130/70-13', 'TIR-PIR13', 8, 2680.00, 'tires')
 ON CONFLICT (sku) DO NOTHING;

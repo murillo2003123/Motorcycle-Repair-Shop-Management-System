@@ -1,8 +1,8 @@
 /**
  * HTTP Server & Interactive Web Application (Deliverables 2, 3 & 4 — Weeks 3–12)
  * Includes:
- * 1. Public Customer Home Page (Hero, Live Plate Repair Tracker, Online Booking Intake, Services & Parts Catalog)
- * 2. Full Admin SaaS Dashboard & 8 Functional Sidebar Modules (Dashboard, Job Orders, Spare Parts, Intake & Pickups, Customers, Mechanics, Payments, Settings)
+ * 1. Public Customer Home Page with all 5 Complete Motorshop Service Categories, Live Plate Tracker, Online Service Booking, and 16+ Spare Parts Catalog
+ * 2. Full Admin SaaS Dashboard & 9 Functional Sidebar Modules (Home Page, Dashboard, Job Orders, Spare Parts, Intake & Pickups, Customers, Mechanics, Payments, Settings)
  *
  * Team:
  * - Alvin Murillo (@murillo2003123 / alvinmurillo2003@gmail.com)
@@ -84,20 +84,20 @@ function renderAppHtml() {
     .home-hero {
       background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 60%, #2563eb 100%);
       color: #fff;
-      padding: 4rem 2rem;
+      padding: 3.75rem 2rem;
       text-align: center;
     }
     .home-hero h1 {
-      font-size: 2.5rem;
+      font-size: 2.4rem;
       font-weight: 900;
       margin: 0 0 0.75rem;
       letter-spacing: -0.03em;
     }
     .home-hero p {
-      max-width: 680px;
+      max-width: 720px;
       margin: 0 auto 2rem;
       color: #cbd5e1;
-      font-size: 1.05rem;
+      font-size: 1.02rem;
     }
     .home-tracker-box {
       max-width: 580px;
@@ -119,27 +119,42 @@ function renderAppHtml() {
       outline: none;
     }
     .home-container {
-      max-width: 1200px;
+      max-width: 1280px;
       margin: 0 auto;
       padding: 3rem 1.5rem;
       width: 100%;
     }
-    .home-grid-3 {
+    .services-5-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 1.35rem;
       margin-bottom: 3rem;
     }
     .home-feature-card {
       background: #fff;
       border-radius: 16px;
-      padding: 1.6rem;
+      padding: 1.5rem;
       border: 1px solid var(--border);
       box-shadow: var(--shadow-card);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
     .home-feature-card h3 {
-      margin: 0.5rem 0;
-      font-size: 1.15rem;
+      margin: 0.5rem 0 0.75rem;
+      font-size: 1.12rem;
+      color: var(--text-dark);
+    }
+    .service-bullet-list {
+      margin: 0 0 1.25rem;
+      padding-left: 1.2rem;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.35rem;
+    }
+    .service-bullet-list li strong {
       color: var(--text-dark);
     }
     .home-booking-grid {
@@ -831,9 +846,9 @@ function renderAppHtml() {
         <span style="font-size:1.25rem; font-weight:800;">MotoCare Shop</span>
       </div>
       <div class="home-nav-links">
-        <a href="#home-services">Services</a>
-        <a href="#home-booking">Book a Repair</a>
-        <a href="#home-parts">Available Parts</a>
+        <a href="#home-services">5 Service Categories</a>
+        <a href="#home-booking">Book a Service</a>
+        <a href="#home-parts">Spare Parts Catalog</a>
         <button type="button" class="btn" onclick="openAdminPortal('dashboard')">
           Admin Dashboard →
         </button>
@@ -842,10 +857,10 @@ function renderAppHtml() {
 
     <section class="home-hero">
       <span style="background:rgba(56,189,248,0.2); color:#7dd3fc; padding:0.3rem 0.85rem; border-radius:999px; font-size:0.78rem; font-weight:700; text-transform:uppercase; letter-spacing:0.06em;">
-        Murillo • Cabatingan • Dagala Motorcycle Service Center
+        Murillo • Cabatingan • Dagala Full-Service Motorshop
       </span>
-      <h1 style="margin-top:1rem;">Fast, Transparent Motorcycle Repair &amp; Maintenance</h1>
-      <p>Track your motorcycle's live service status by plate number, book a repair appointment online, or browse genuine spare parts in stock.</p>
+      <h1 style="margin-top:1rem;">Complete Motorcycle Repair, Parts, Cleaning &amp; Customization</h1>
+      <p>Track your motorcycle's live repair status by plate number, book any of our 5 specialized motorshop service categories online, or browse our 16+ genuine spare parts in stock.</p>
 
       <!-- Live Plate Number Repair Tracker -->
       <div class="home-tracker-box">
@@ -858,42 +873,106 @@ function renderAppHtml() {
     </section>
 
     <div class="home-container">
-      <!-- Shop Highlights / Services -->
-      <div id="home-services" class="home-grid-3">
+      <div style="text-align:center; margin-bottom:2rem;">
+        <h2 style="margin:0; font-size:1.65rem; font-weight:800;">Our 5 Complete Motorshop Service Divisions</h2>
+        <p style="color:var(--text-muted); margin:0.4rem 0 0;">Click any service card to book or manage in the system</p>
+      </div>
+
+      <!-- 5 Complete Motorshop Service Categories -->
+      <div id="home-services" class="services-5-grid">
+        <!-- Category 1 -->
         <div class="home-feature-card">
-          <div class="kpi-icon blue" style="margin-bottom:0.75rem;">🏍️</div>
-          <h3>1. Motorcycle Intake &amp; Registration</h3>
-          <p style="color:var(--text-muted); font-size:0.88rem; margin-bottom:1rem;">
-            Instant plate lookup and digital service history for scooters, underbones, and big bikes. Managed by <strong>Alvin Murillo</strong>.
-          </p>
-          <button type="button" class="btn btn-secondary btn-sm" onclick="openAdminPortal('customers')">Manage Customers →</button>
+          <div>
+            <div class="kpi-icon blue" style="margin-bottom:0.5rem;">🔧</div>
+            <h3>1. Motorcycle Repair and Maintenance</h3>
+            <ul class="service-bullet-list">
+              <li><strong>Engine repair and tune-up</strong></li>
+              <li><strong>Oil and filter change</strong></li>
+              <li><strong>Brake repair and adjustment</strong></li>
+              <li><strong>Clutch repair and adjustment</strong></li>
+              <li><strong>Chain adjustment and lubrication</strong></li>
+              <li><strong>Tire repair and replacement</strong></li>
+              <li><strong>Battery inspection and replacement</strong></li>
+              <li><strong>Electrical system repair</strong></li>
+              <li><strong>Carburetor cleaning and adjustment</strong></li>
+              <li><strong>Fuel injection (FI) cleaning</strong></li>
+            </ul>
+          </div>
+          <button type="button" class="btn btn-secondary btn-sm" onclick="openAdminPortal('repairs')">Open Repair Job Orders →</button>
         </div>
 
+        <!-- Category 2 -->
         <div class="home-feature-card">
-          <div class="kpi-icon purple" style="margin-bottom:0.75rem;">🔧</div>
-          <h3>2. Live Repair Job Order Pipeline</h3>
-          <p style="color:var(--text-muted); font-size:0.88rem; margin-bottom:1rem;">
-            Real-time bay tracking from Intake → Diagnosis → Servicing → Road Test → Release. Managed by <strong>John Angelo Cabatingan</strong>.
-          </p>
-          <button type="button" class="btn btn-secondary btn-sm" onclick="openAdminPortal('repairs')">View Job Orders →</button>
+          <div>
+            <div class="kpi-icon purple" style="margin-bottom:0.5rem;">⚙️</div>
+            <h3>2. Motorcycle Parts and Accessories</h3>
+            <ul class="service-bullet-list">
+              <li><strong>Sale of motorcycle spare parts</strong></li>
+              <li><strong>Tires and inner tubes</strong></li>
+              <li><strong>Batteries</strong> (Maintenance-free 12V)</li>
+              <li><strong>Engine oils and lubricants</strong></li>
+              <li><strong>Helmets and riding gear</strong></li>
+              <li><strong>Motorcycle accessories</strong></li>
+              <li><strong>Lights and electrical accessories</strong></li>
+            </ul>
+          </div>
+          <button type="button" class="btn btn-secondary btn-sm" onclick="openAdminPortal('parts')">Browse Spare Parts Inventory →</button>
         </div>
 
+        <!-- Category 3 -->
         <div class="home-feature-card">
-          <div class="kpi-icon blue" style="margin-bottom:0.75rem;">📦</div>
-          <h3>3. Genuine Spare Parts &amp; Lubricants</h3>
-          <p style="color:var(--text-muted); font-size:0.88rem; margin-bottom:1rem;">
-            Live SKU stock monitoring for synthetic oils, brake pads, tires, and electrical components. Managed by <strong>Keanu Dagala</strong>.
-          </p>
-          <button type="button" class="btn btn-secondary btn-sm" onclick="openAdminPortal('parts')">Browse Spare Parts →</button>
+          <div>
+            <div class="kpi-icon blue" style="margin-bottom:0.5rem;">✨</div>
+            <h3>3. Motorcycle Cleaning Services</h3>
+            <ul class="service-bullet-list">
+              <li><strong>Motorcycle washing</strong> (Foam &amp; pressure wash)</li>
+              <li><strong>Engine cleaning</strong> &amp; degreasing</li>
+              <li><strong>Detailing and polishing</strong></li>
+              <li><strong>Rust removal</strong> &amp; chassis protection</li>
+            </ul>
+          </div>
+          <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('hb-issue').value='Motorcycle washing, detailing, polishing & rust removal'; document.getElementById('hb-name').focus();">Book Cleaning Service →</button>
+        </div>
+
+        <!-- Category 4 -->
+        <div class="home-feature-card">
+          <div>
+            <div class="kpi-icon blue" style="margin-bottom:0.5rem;">🎨</div>
+            <h3>4. Other Specialized Services</h3>
+            <ul class="service-bullet-list">
+              <li><strong>Motorcycle repainting</strong> &amp; custom fairings</li>
+              <li><strong>Motorcycle customization</strong></li>
+              <li><strong>Installation of accessories</strong></li>
+              <li><strong>Motorcycle inspection</strong></li>
+              <li><strong>Preventive maintenance</strong></li>
+              <li><strong>Motorcycle troubleshooting</strong></li>
+            </ul>
+          </div>
+          <button type="button" class="btn btn-secondary btn-sm" onclick="document.getElementById('hb-issue').value='Preventive maintenance, inspection & accessory installation'; document.getElementById('hb-name').focus();">Book Specialized Service →</button>
+        </div>
+
+        <!-- Category 5 -->
+        <div class="home-feature-card">
+          <div>
+            <div class="kpi-icon purple" style="margin-bottom:0.5rem;">🏪</div>
+            <h3>5. Additional Business Services</h3>
+            <ul class="service-bullet-list">
+              <li><strong>Motorcycle spare parts retailing</strong></li>
+              <li><strong>Motorcycle accessories retailing</strong></li>
+              <li><strong>Motorcycle tire and battery sales</strong></li>
+              <li><strong>Motorcycle repair consultation services of the motorshop</strong></li>
+            </ul>
+          </div>
+          <button type="button" class="btn btn-secondary btn-sm" onclick="openAdminPortal('customers')">Request Shop Consultation →</button>
         </div>
       </div>
 
       <!-- Online Customer Booking Form + Live Spare Parts Catalog -->
       <div id="home-booking" class="home-booking-grid">
         <div class="white-card">
-          <h3 style="margin-top:0; font-size:1.2rem;">📅 Book a Motorcycle Service Appointment</h3>
+          <h3 style="margin-top:0; font-size:1.2rem;">📅 Book a Motorcycle Service or Consultation</h3>
           <p style="color:var(--text-muted); font-size:0.85rem; margin-bottom:1.2rem;">
-            Register your motorcycle and reported issue below. It will appear immediately in the shop's live intake queue!
+            Select any service from our 5 divisions below. Submitting automatically creates a Customer record and a live Job Order!
           </p>
           <form id="home-booking-form" novalidate>
             <div class="form-group">
@@ -913,8 +992,22 @@ function renderAppHtml() {
               <input id="hb-model" name="motorcycleModel" placeholder="Yamaha Aerox 155" required />
             </div>
             <div class="form-group">
-              <label for="hb-issue">Service Needed / Reported Issue *</label>
-              <input id="hb-issue" name="issue" placeholder="Full CVT cleaning, tune-up, and oil change" required />
+              <label for="hb-service-preset">Select Motorshop Service Category *</label>
+              <select id="hb-service-preset" onchange="document.getElementById('hb-issue').value = this.value">
+                <option value="Engine repair and tune-up + Oil and filter change">1. Repair: Engine repair and tune-up</option>
+                <option value="Oil and filter change + Chain adjustment and lubrication">1. Repair: Oil and filter change</option>
+                <option value="Brake repair and adjustment + Clutch repair">1. Repair: Brake &amp; Clutch repair and adjustment</option>
+                <option value="Tire repair and replacement + Battery inspection">1. Repair: Tire replacement &amp; Battery inspection</option>
+                <option value="Electrical system repair + Carburetor / Fuel injection (FI) cleaning">1. Repair: Electrical &amp; FI / Carburetor cleaning</option>
+                <option value="Motorcycle washing, Engine cleaning, Detailing, polishing & Rust removal">3. Cleaning: Full Wash, Engine Cleaning, Detailing &amp; Rust Removal</option>
+                <option value="Motorcycle repainting, customization & installation of accessories">4. Other: Repainting, Customization &amp; Accessory Installation</option>
+                <option value="Motorcycle inspection, preventive maintenance & troubleshooting">4. Other: Inspection, Preventive Maintenance &amp; Troubleshooting</option>
+                <option value="Motorcycle repair consultation service & spare parts/tire/battery retail">5. Business: Repair Consultation &amp; Parts/Tire/Battery Retail</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="hb-issue">Specific Service Details / Reported Issue *</label>
+              <input id="hb-issue" name="issue" value="Engine repair and tune-up + Oil and filter change" required />
             </div>
             <button type="submit" class="btn" id="hb-submit-btn" style="width:100%; justify-content:center; padding:0.75rem;">
               Submit Service Booking
@@ -924,13 +1017,13 @@ function renderAppHtml() {
 
         <div id="home-parts" class="white-card">
           <div class="card-header-row">
-            <h3 style="margin:0; font-size:1.15rem;">🛠️ Live Spare Parts &amp; Pricing</h3>
-            <span class="pill-live">In Stock</span>
+            <h3 style="margin:0; font-size:1.15rem;">🛠️ Spare Parts, Tires, Batteries &amp; Gear (16 SKUs)</h3>
+            <span class="pill-live">Live Retail Stock</span>
           </div>
           <p style="color:var(--text-muted); font-size:0.84rem; margin-top:0;">
-            Real-time spare parts inventory fetched directly from the shop server:
+            Genuine spare parts, tires, batteries, oils, helmets, and LED accessories in stock:
           </p>
-          <div id="home-parts-list" style="display:flex; flex-direction:column; gap:0.65rem; margin-top:1rem;"></div>
+          <div id="home-parts-list" style="display:flex; flex-direction:column; gap:0.55rem; margin-top:1rem; max-height:520px; overflow-y:auto; padding-right:0.25rem;"></div>
         </div>
       </div>
     </div>
@@ -1171,7 +1264,7 @@ function renderAppHtml() {
                   <div class="stage-tag">In Bay</div>
                 </div>
                 <div class="stage-card stage-drying" onclick="switchTab('parts')">
-                  <div class="stage-count" id="pipe-parts">2</div>
+                  <div class="stage-count" id="pipe-parts">16</div>
                   <div class="stage-name">SERVICING</div>
                   <div class="stage-tag">In Repair</div>
                 </div>
@@ -1558,7 +1651,7 @@ function renderAppHtml() {
         pickups: 'Motorcycle Intake & Scheduled Pickups',
         repairs: 'Repair Job Orders',
         payments: 'Service Billing & Settled Payments',
-        parts: 'Spare Parts Inventory',
+        parts: 'Spare Parts Inventory (16+ SKUs)',
       };
       const subtitles = {
         customers: 'Owner: Alvin Murillo (@murillo2003123) — Full CRUD + Plate Lookup Checkpoint',
@@ -1712,8 +1805,8 @@ function renderAppHtml() {
             <div class="field-error" data-error-for="customerId"></div>
           </div>
           <div class="form-group">
-            <label for="f-issue">Reported Issue *</label>
-            <input id="f-issue" name="issue" value="\${escapeHtml(record.issue || '')}" placeholder="Full CVT cleaning and oil change" />
+            <label for="f-issue">Reported Issue / Service Type *</label>
+            <input id="f-issue" name="issue" value="\${escapeHtml(record.issue || '')}" placeholder="Engine repair and tune-up / Oil and filter change" />
             <div class="field-error" data-error-for="issue"></div>
           </div>
           <div class="form-group">
@@ -1741,7 +1834,7 @@ function renderAppHtml() {
       const cat = record.category || 'lubricants';
       return \`
         <div class="form-group">
-          <label for="f-name">Part Name *</label>
+          <label for="f-name">Part / Accessory Name *</label>
           <input id="f-name" name="name" value="\${escapeHtml(record.name || '')}" placeholder="Synthetic Scooter Oil 10W-40" />
           <div class="field-error" data-error-for="name"></div>
         </div>

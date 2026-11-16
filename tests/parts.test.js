@@ -32,7 +32,7 @@ describe('Spare Parts Inventory Controllers — Owner: Dagala', () => {
 
     // Assert
     expect(result.status).toBe(200);
-    expect(result.data.length).toBe(2);
+    expect(result.data.length).toBe(16);
     expect(result.data[0].sku).toBe('OIL-10W40');
   });
 
@@ -85,7 +85,7 @@ describe('Spare Parts Inventory Controllers — Owner: Dagala', () => {
 
     // Assert
     expect(result.status).toBe(201);
-    expect(result.data.id).toBe(3);
+    expect(result.data.id).toBe(17);
     expect(result.data.sku).toBe('SPK-NGK01');
     expect(result.data.qty).toBe(40);
   });
