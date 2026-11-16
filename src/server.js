@@ -1287,7 +1287,7 @@ function renderAppHtml() {
                 <div>
                   <h3 class="card-title">Motorcycle Service Bay &amp; Mechanics Fleet</h3>
                   <p style="margin:0.15rem 0 0; font-size:0.75rem; color:var(--text-muted);">
-                    Murillo, Cabatingan &amp; Dagala Sector-Based Repair Hub (Supabase &amp; Vercel)
+                    Mechanic Name, Phone Number &amp; Assigned Repair Work
                   </p>
                 </div>
                 <button type="button" class="view-all-link" onclick="switchTab('staff')">View All →</button>
@@ -1298,14 +1298,44 @@ function renderAppHtml() {
                   <div class="avatar-circle" style="width:40px;height:40px;">AM</div>
                   <div>
                     <div style="font-weight:800; font-size:0.88rem; color:#0f172a;">
-                      Alvin Murillo • John Angelo Cabatingan • Keanu Dagala
+                      Alvin Murillo • 📞 0917-200-3123
                     </div>
                     <div style="font-size:0.75rem; color:#2563eb; font-weight:600; margin-top:0.1rem;">
-                      🏍️ Dedicated Motorcycle Mechanics &amp; Shop Leads • Bay 1, Bay 2 &amp; Parts Hub
+                      🔧 Work: Engine Repair &amp; Tune-Up, Fuel Injection (FI) &amp; Carburetor Cleaning, Motorcycle Inspection
                     </div>
                   </div>
                 </div>
-                <span class="pill-live">Active On Duty</span>
+                <span class="pill-live">Active</span>
+              </div>
+
+              <div class="mechanic-banner">
+                <div class="mechanic-info">
+                  <div class="avatar-circle" style="width:40px;height:40px;background:#0284c7;">JC</div>
+                  <div>
+                    <div style="font-weight:800; font-size:0.88rem; color:#0f172a;">
+                      John Angelo Cabatingan • 📞 0918-200-3456
+                    </div>
+                    <div style="font-size:0.75rem; color:#2563eb; font-weight:600; margin-top:0.1rem;">
+                      🔧 Work: Brake &amp; Clutch Repair, Electrical System &amp; LED Lights Wiring, Preventive Maintenance
+                    </div>
+                  </div>
+                </div>
+                <span class="pill-live">Active</span>
+              </div>
+
+              <div class="mechanic-banner">
+                <div class="mechanic-info">
+                  <div class="avatar-circle" style="width:40px;height:40px;background:#0d9488;">KD</div>
+                  <div>
+                    <div style="font-weight:800; font-size:0.88rem; color:#0f172a;">
+                      Keanu Dagala • 📞 0919-200-3789
+                    </div>
+                    <div style="font-size:0.75rem; color:#2563eb; font-weight:600; margin-top:0.1rem;">
+                      🔧 Work: Oil &amp; Filter Change, Tire &amp; Battery Replacement, Chain Lubrication &amp; Detailing
+                    </div>
+                  </div>
+                </div>
+                <span class="pill-live">Active</span>
               </div>
             </div>
 
@@ -1590,37 +1620,41 @@ function renderAppHtml() {
       if (tab === 'staff' || tab === 'settings') {
         document.getElementById('open-create-btn').style.display = 'none';
         document.getElementById('module-title').textContent =
-          tab === 'staff' ? 'Mechanics & Team Contributors' : 'System Settings & QA Verification';
+          tab === 'staff' ? 'Shop Mechanics' : 'System Settings & QA Verification';
         document.getElementById('module-subtitle').textContent =
           tab === 'staff'
-            ? 'Equal module ownership across @murillo2003123, @johnangelocabatingan2003-dot, and @keanudagala2003-blip'
+            ? 'Motorcycle Repair Shop Mechanics — Name, Phone Number, and Assigned Work'
             : 'Supabase PostgreSQL + Vercel Production Configuration (APP_DEBUG=false)';
         renderStateBanner(null);
         const head = document.getElementById('table-head');
         const body = document.getElementById('table-body');
         if (tab === 'staff') {
-          head.innerHTML = '<tr><th>GitHub Username</th><th>Full Name</th><th>Owned Resource Module</th><th>Solo Checkpoint Route</th><th>Status</th></tr>';
+          head.innerHTML = '<tr><th>Mechanic Name</th><th>Phone Number</th><th>Assigned Work / Specialization</th></tr>';
           body.innerHTML = \`
             <tr>
-              <td><code>@murillo2003123</code></td>
               <td><strong>Alvin Murillo</strong></td>
-              <td>Customers &amp; Motorcycles (<code>/customers</code>)</td>
-              <td><code>GET /customers/plate/:plateNumber</code></td>
-              <td><span class="badge badge-paid">Repo Owner</span></td>
+              <td>0917-200-3123</td>
+              <td>Engine repair and tune-up, Fuel injection (FI) &amp; carburetor cleaning, Motorcycle inspection &amp; troubleshooting</td>
             </tr>
             <tr>
-              <td><code>@johnangelocabatingan2003-dot</code></td>
               <td><strong>John Angelo Cabatingan</strong></td>
-              <td>Repair Job Orders (<code>/repairs</code>)</td>
-              <td><code>PATCH /repairs/:id/status</code></td>
-              <td><span class="badge badge-in_progress">Collaborator</span></td>
+              <td>0918-200-3456</td>
+              <td>Brake &amp; clutch repair and adjustment, Electrical system repair, Installation of lights &amp; accessories, Preventive maintenance</td>
             </tr>
             <tr>
-              <td><code>@keanudagala2003-blip</code></td>
               <td><strong>Keanu Dagala</strong></td>
-              <td>Spare Parts Inventory (<code>/parts</code>)</td>
-              <td><code>POST /parts/:id/restock</code></td>
-              <td><span class="badge badge-in_progress">Collaborator</span></td>
+              <td>0919-200-3789</td>
+              <td>Oil and filter change, Tire &amp; battery replacement, Chain adjustment &amp; lubrication, Motorcycle washing, detailing &amp; rust removal</td>
+            </tr>
+            <tr>
+              <td><strong>Berto (Bay 1 Mechanic)</strong></td>
+              <td>0917-555-0142</td>
+              <td>Full CVT cleaning, Engine oil &amp; gear oil change, Scooter belt &amp; roller tuning</td>
+            </tr>
+            <tr>
+              <td><strong>Dante (Bay 2 Mechanic)</strong></td>
+              <td>0918-555-0198</td>
+              <td>Front &amp; rear brake pad replacement, Hydraulic brake fluid bleed, Tire vulcanizing &amp; balancing, Repainting &amp; customization</td>
             </tr>
           \`;
         } else {
