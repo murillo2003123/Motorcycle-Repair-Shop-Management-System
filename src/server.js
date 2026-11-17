@@ -1029,8 +1029,8 @@ function renderAppHtml() {
     </div>
 
     <footer class="home-footer">
-      <div><strong>MotoCare — Motorcycle Repair Shop Management System</strong> • Powered by Supabase PostgreSQL &amp; Vercel</div>
-      <div style="margin-top:0.35rem;">Team Contributors: Alvin Murillo (@murillo2003123) • John Angelo Cabatingan (@johnangelocabatingan2003-dot) • Keanu Dagala (@keanudagala2003-blip)</div>
+      <div><strong>MotoCare — Motorcycle Repair Shop Management System</strong></div>
+      <div style="margin-top:0.35rem;">Full-Service Motorcycle Repair, Spare Parts, Cleaning, Customization &amp; Consultation</div>
     </footer>
   </div>
 
@@ -1617,54 +1617,86 @@ function renderAppHtml() {
       document.getElementById('dashboard-view').style.display = 'none';
       document.getElementById('module-view').style.display = 'block';
 
-      if (tab === 'staff' || tab === 'settings') {
+      if (tab === 'staff') {
         document.getElementById('open-create-btn').style.display = 'none';
-        document.getElementById('module-title').textContent =
-          tab === 'staff' ? 'Shop Mechanics' : 'System Settings & QA Verification';
+        document.getElementById('module-title').textContent = 'Shop Mechanics';
         document.getElementById('module-subtitle').textContent =
-          tab === 'staff'
-            ? 'Motorcycle Repair Shop Mechanics — Name, Phone Number, and Assigned Work'
-            : 'Supabase PostgreSQL + Vercel Production Configuration (APP_DEBUG=false)';
+          'Motorcycle Repair Shop Mechanics — Name, Phone Number, and Assigned Work';
         renderStateBanner(null);
         const head = document.getElementById('table-head');
         const body = document.getElementById('table-body');
-        if (tab === 'staff') {
-          head.innerHTML = '<tr><th>Mechanic Name</th><th>Phone Number</th><th>Assigned Work / Specialization</th></tr>';
-          body.innerHTML = \`
+        head.innerHTML = '<tr><th>Mechanic Name</th><th>Phone Number</th><th>Assigned Work</th></tr>';
+        body.innerHTML = \`
+          <tr>
+            <td><strong>Alvin Murillo</strong></td>
+            <td>0917-200-3123</td>
+            <td>Engine repair and tune-up, Fuel injection (FI) &amp; carburetor cleaning, Motorcycle inspection &amp; troubleshooting</td>
+          </tr>
+          <tr>
+            <td><strong>John Angelo Cabatingan</strong></td>
+            <td>0918-200-3456</td>
+            <td>Brake &amp; clutch repair and adjustment, Electrical system repair, Installation of lights &amp; accessories, Preventive maintenance</td>
+          </tr>
+          <tr>
+            <td><strong>Keanu Dagala</strong></td>
+            <td>0919-200-3789</td>
+            <td>Oil and filter change, Tire &amp; battery replacement, Chain adjustment &amp; lubrication, Motorcycle washing, detailing &amp; rust removal</td>
+          </tr>
+          <tr>
+            <td><strong>Berto</strong></td>
+            <td>0917-555-0142</td>
+            <td>Full CVT cleaning, Engine oil &amp; gear oil change, Scooter belt &amp; roller tuning</td>
+          </tr>
+          <tr>
+            <td><strong>Dante</strong></td>
+            <td>0918-555-0198</td>
+            <td>Front &amp; rear brake pad replacement, Hydraulic brake fluid bleed, Tire vulcanizing &amp; balancing, Repainting &amp; customization</td>
+          </tr>
+        \`;
+        return;
+      }
+
+      if (tab === 'settings') {
+        document.getElementById('open-create-btn').style.display = 'none';
+        document.getElementById('module-title').textContent = 'Spare Parts Price Settings';
+        document.getElementById('module-subtitle').textContent =
+          'Update the unit price (PHP) of any specific spare part in the motorshop inventory';
+        renderStateBanner('loading', 'Loading spare parts pricing...');
+        try {
+          const res = await apiRequest('GET', '/parts');
+          state.records = res.data || [];
+          renderStateBanner(null);
+          const head = document.getElementById('table-head');
+          const body = document.getElementById('table-body');
+          head.innerHTML =
+            '<tr><th>ID</th><th>SKU Code</th><th>Spare Part Name</th><th>Category</th><th>Current Price</th><th>New Unit Price (PHP)</th><th>Action</th></tr>';
+          body.innerHTML = state.records.map((p) => \`
             <tr>
-              <td><strong>Alvin Murillo</strong></td>
-              <td>0917-200-3123</td>
-              <td>Engine repair and tune-up, Fuel injection (FI) &amp; carburetor cleaning, Motorcycle inspection &amp; troubleshooting</td>
+              <td><strong>#\${p.id}</strong></td>
+              <td><code>\${escapeHtml(p.sku)}</code></td>
+              <td><strong>\${escapeHtml(p.name)}</strong></td>
+              <td>\${escapeHtml(p.category)}</td>
+              <td><strong style="color:#2563eb;">₱\${Number(p.unitPrice).toFixed(2)}</strong></td>
+              <td>
+                <input
+                  type="number"
+                  id="price-input-\${p.id}"
+                  value="\${Number(p.unitPrice)}"
+                  min="1"
+                  max="100000"
+                  step="1"
+                  style="width:130px; padding:0.42rem 0.6rem; border:1px solid #cbd5e1; border-radius:8px; font-weight:700;"
+                />
+              </td>
+              <td>
+                <button type="button" class="btn btn-sm" onclick="updatePartPriceSetting(\${p.id})">
+                  Update Price
+                </button>
+              </td>
             </tr>
-            <tr>
-              <td><strong>John Angelo Cabatingan</strong></td>
-              <td>0918-200-3456</td>
-              <td>Brake &amp; clutch repair and adjustment, Electrical system repair, Installation of lights &amp; accessories, Preventive maintenance</td>
-            </tr>
-            <tr>
-              <td><strong>Keanu Dagala</strong></td>
-              <td>0919-200-3789</td>
-              <td>Oil and filter change, Tire &amp; battery replacement, Chain adjustment &amp; lubrication, Motorcycle washing, detailing &amp; rust removal</td>
-            </tr>
-            <tr>
-              <td><strong>Berto (Bay 1 Mechanic)</strong></td>
-              <td>0917-555-0142</td>
-              <td>Full CVT cleaning, Engine oil &amp; gear oil change, Scooter belt &amp; roller tuning</td>
-            </tr>
-            <tr>
-              <td><strong>Dante (Bay 2 Mechanic)</strong></td>
-              <td>0918-555-0198</td>
-              <td>Front &amp; rear brake pad replacement, Hydraulic brake fluid bleed, Tire vulcanizing &amp; balancing, Repainting &amp; customization</td>
-            </tr>
-          \`;
-        } else {
-          head.innerHTML = '<tr><th>Setting / Check</th><th>Value</th><th>Description</th></tr>';
-          body.innerHTML = \`
-            <tr><td><strong>Database Engine</strong></td><td><code>Supabase PostgreSQL</code></td><td>Connected via PostgREST &amp; RLS Policies</td></tr>
-            <tr><td><strong>Cloud Hosting</strong></td><td><code>Vercel Production</code></td><td>Serverless Node.js HTTP Handler</td></tr>
-            <tr><td><strong>Automated Test Suite</strong></td><td><code>51 / 51 Passing</code></td><td>Happy path, 422 validation, 403 auth guard, 404/405 edge cases</td></tr>
-            <tr><td><strong>Production Debug Mode</strong></td><td><code>APP_DEBUG = false</code></td><td>Prevents stack trace leakage in production</td></tr>
-          \`;
+          \`).join('');
+        } catch (_err) {
+          renderStateBanner('error', 'Unable to load spare parts pricing. Click Retry Connection.', loadCurrentModule);
         }
         return;
       }
@@ -1688,11 +1720,11 @@ function renderAppHtml() {
         parts: 'Spare Parts Inventory (16+ SKUs)',
       };
       const subtitles = {
-        customers: 'Owner: Alvin Murillo (@murillo2003123) — Full CRUD + Plate Lookup Checkpoint',
+        customers: 'Registered riders, contact numbers, motorcycle models, and plate lookup',
         pickups: 'Scheduled motorcycle intakes & registered rider vehicles — Click "+ New Record" to log intake',
-        repairs: 'Owner: John Angelo Cabatingan (@johnangelocabatingan2003-dot) — Full CRUD + Status Checkpoint',
+        repairs: 'Active service job orders, assigned mechanics, labor estimates, and repair workflow stages',
         payments: 'Track labor billing, mark job orders as Paid, and verify shop revenue',
-        parts: 'Owner: Keanu Dagala (@keanudagala2003-blip) — Full CRUD + Restock Checkpoint',
+        parts: 'Complete spare parts, tires, batteries, oils, and accessories inventory',
       };
       document.getElementById('module-title').textContent = titles[tab];
       document.getElementById('module-subtitle').textContent = subtitles[tab];
@@ -2061,6 +2093,34 @@ function renderAppHtml() {
         }
       } catch (_err) {
         showToast('Network error while restocking part.', true);
+      }
+    }
+
+    async function updatePartPriceSetting(id) {
+      const part = state.records.find((r) => r.id === id);
+      if (!part) return;
+      const inputEl = document.getElementById('price-input-' + id);
+      const newPrice = Number(inputEl.value);
+      if (!Number.isFinite(newPrice) || newPrice < 1 || newPrice > 100000) {
+        showToast('Please enter a valid price between ₱1 and ₱100,000.', true);
+        return;
+      }
+      try {
+        const res = await apiRequest('PUT', \`/parts/\${id}\`, {
+          name: part.name,
+          sku: part.sku,
+          qty: Number(part.qty),
+          unitPrice: newPrice,
+          category: part.category,
+        });
+        if (res.status === 200) {
+          showToast(\`Updated price of "\${part.name}" to ₱\${newPrice.toFixed(2)}!\`);
+          await loadCurrentModule();
+        } else {
+          showToast(res.error || 'Failed to update price.', true);
+        }
+      } catch (_err) {
+        showToast('Network error while updating part price.', true);
       }
     }
 
